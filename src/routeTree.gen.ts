@@ -8,185 +8,215 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicHomeIndexRouteImport } from './routes/_public/home/index'
+import { Route as AuthTestIndexRouteImport } from './routes/_auth/test/index'
+import { Route as AuthSubmit_labIndexRouteImport } from './routes/_auth/submit_lab/index'
+import { Route as AuthResultIndexRouteImport } from './routes/_auth/result/index'
+import { Route as AuthLocPersonIndexRouteImport } from './routes/_auth/loc-person/index'
+import { Route as AuthAboutIndexRouteImport } from './routes/_auth/about/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as PublicImport } from './routes/_public'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as IndexImport } from './routes/index'
-import { Route as PublicHomeIndexImport } from './routes/_public/home/index'
-<<<<<<< Updated upstream
-import { Route as AuthTestIndexImport } from './routes/_auth/test/index'
-=======
-import { Route as AuthSubmitlabIndexImport } from './routes/_auth/submit_lab/index'
-import { Route as AuthResultIndexImport } from './routes/_auth/result/index'
-import { Route as AuthLocPersonIndexImport } from './routes/_auth/loc-person/index'
-import { Route as AuthAssignmentlistIndexImport } from './routes/_auth/assignmentlist/index'
->>>>>>> Stashed changes
-import { Route as AuthAboutIndexImport } from './routes/_auth/about/index'
-
-// Create/Update Routes
-
-const PublicRoute = PublicImport.update({
+const PublicRoute = PublicRouteImport.update({
   id: '/_public',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthRoute = AuthImport.update({
+const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PublicHomeIndexRoute = PublicHomeIndexImport.update({
+const PublicHomeIndexRoute = PublicHomeIndexRouteImport.update({
   id: '/home/',
   path: '/home/',
   getParentRoute: () => PublicRoute,
 } as any)
-
-<<<<<<< Updated upstream
-const AuthTestIndexRoute = AuthTestIndexImport.update({
+const AuthTestIndexRoute = AuthTestIndexRouteImport.update({
   id: '/test/',
   path: '/test/',
-=======
-const AuthSubmitlabIndexRoute = AuthSubmitlabIndexImport.update({
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSubmit_labIndexRoute = AuthSubmit_labIndexRouteImport.update({
   id: '/submit_lab/',
   path: '/submit_lab/',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthResultIndexRoute = AuthResultIndexImport.update({
+const AuthResultIndexRoute = AuthResultIndexRouteImport.update({
   id: '/result/',
   path: '/result/',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthLocPersonIndexRoute = AuthLocPersonIndexImport.update({
+const AuthLocPersonIndexRoute = AuthLocPersonIndexRouteImport.update({
   id: '/loc-person/',
   path: '/loc-person/',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthAssignmentlistIndexRoute = AuthAssignmentlistIndexImport.update({
-  id: '/assignmentlist/',
-  path: '/assignmentlist/',
->>>>>>> Stashed changes
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthAboutIndexRoute = AuthAboutIndexImport.update({
+const AuthAboutIndexRoute = AuthAboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
   getParentRoute: () => AuthRoute,
 } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '': typeof PublicRouteWithChildren
+  '/about': typeof AuthAboutIndexRoute
+  '/loc-person': typeof AuthLocPersonIndexRoute
+  '/result': typeof AuthResultIndexRoute
+  '/submit_lab': typeof AuthSubmit_labIndexRoute
+  '/test': typeof AuthTestIndexRoute
+  '/home': typeof PublicHomeIndexRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '': typeof PublicRouteWithChildren
+  '/about': typeof AuthAboutIndexRoute
+  '/loc-person': typeof AuthLocPersonIndexRoute
+  '/result': typeof AuthResultIndexRoute
+  '/submit_lab': typeof AuthSubmit_labIndexRoute
+  '/test': typeof AuthTestIndexRoute
+  '/home': typeof PublicHomeIndexRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_public': typeof PublicRouteWithChildren
+  '/_auth/about/': typeof AuthAboutIndexRoute
+  '/_auth/loc-person/': typeof AuthLocPersonIndexRoute
+  '/_auth/result/': typeof AuthResultIndexRoute
+  '/_auth/submit_lab/': typeof AuthSubmit_labIndexRoute
+  '/_auth/test/': typeof AuthTestIndexRoute
+  '/_public/home/': typeof PublicHomeIndexRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | ''
+    | '/about'
+    | '/loc-person'
+    | '/result'
+    | '/submit_lab'
+    | '/test'
+    | '/home'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | ''
+    | '/about'
+    | '/loc-person'
+    | '/result'
+    | '/submit_lab'
+    | '/test'
+    | '/home'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_public'
+    | '/_auth/about/'
+    | '/_auth/loc-person/'
+    | '/_auth/result/'
+    | '/_auth/submit_lab/'
+    | '/_auth/test/'
+    | '/_public/home/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  PublicRoute: typeof PublicRouteWithChildren
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_public': {
-      id: '/_public'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof PublicImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/about/': {
-      id: '/_auth/about/'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AuthAboutIndexImport
-      parentRoute: typeof AuthImport
-    }
-<<<<<<< Updated upstream
-    '/_auth/test/': {
-      id: '/_auth/test/'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof AuthTestIndexImport
-=======
-    '/_auth/assignmentlist/': {
-      id: '/_auth/assignmentlist/'
-      path: '/assignmentlist'
-      fullPath: '/assignmentlist'
-      preLoaderRoute: typeof AuthAssignmentlistIndexImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/loc-person/': {
-      id: '/_auth/loc-person/'
-      path: '/loc-person'
-      fullPath: '/loc-person'
-      preLoaderRoute: typeof AuthLocPersonIndexImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/result/': {
-      id: '/_auth/result/'
-      path: '/result'
-      fullPath: '/result'
-      preLoaderRoute: typeof AuthResultIndexImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/submit_lab/': {
-      id: '/_auth/submit_lab/'
-      path: '/submit_lab'
-      fullPath: '/submit_lab'
-      preLoaderRoute: typeof AuthSubmitlabIndexImport
->>>>>>> Stashed changes
-      parentRoute: typeof AuthImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_public/home/': {
       id: '/_public/home/'
       path: '/home'
       fullPath: '/home'
-      preLoaderRoute: typeof PublicHomeIndexImport
-      parentRoute: typeof PublicImport
+      preLoaderRoute: typeof PublicHomeIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_auth/test/': {
+      id: '/_auth/test/'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof AuthTestIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/submit_lab/': {
+      id: '/_auth/submit_lab/'
+      path: '/submit_lab'
+      fullPath: '/submit_lab'
+      preLoaderRoute: typeof AuthSubmit_labIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/result/': {
+      id: '/_auth/result/'
+      path: '/result'
+      fullPath: '/result'
+      preLoaderRoute: typeof AuthResultIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/loc-person/': {
+      id: '/_auth/loc-person/'
+      path: '/loc-person'
+      fullPath: '/loc-person'
+      preLoaderRoute: typeof AuthLocPersonIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/about/': {
+      id: '/_auth/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AuthAboutIndexRouteImport
+      parentRoute: typeof AuthRoute
     }
   }
 }
 
-// Create and export the route tree
-
 interface AuthRouteChildren {
   AuthAboutIndexRoute: typeof AuthAboutIndexRoute
-<<<<<<< Updated upstream
-  AuthTestIndexRoute: typeof AuthTestIndexRoute
-=======
-  AuthAssignmentlistIndexRoute: typeof AuthAssignmentlistIndexRoute
   AuthLocPersonIndexRoute: typeof AuthLocPersonIndexRoute
   AuthResultIndexRoute: typeof AuthResultIndexRoute
-  AuthSubmitlabIndexRoute: typeof AuthSubmitlabIndexRoute
->>>>>>> Stashed changes
+  AuthSubmit_labIndexRoute: typeof AuthSubmit_labIndexRoute
+  AuthTestIndexRoute: typeof AuthTestIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAboutIndexRoute: AuthAboutIndexRoute,
-<<<<<<< Updated upstream
-  AuthTestIndexRoute: AuthTestIndexRoute,
-=======
-  AuthAssignmentlistIndexRoute: AuthAssignmentlistIndexRoute,
   AuthLocPersonIndexRoute: AuthLocPersonIndexRoute,
   AuthResultIndexRoute: AuthResultIndexRoute,
-  AuthSubmitlabIndexRoute: AuthSubmitlabIndexRoute,
->>>>>>> Stashed changes
+  AuthSubmit_labIndexRoute: AuthSubmit_labIndexRoute,
+  AuthTestIndexRoute: AuthTestIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -202,179 +232,11 @@ const PublicRouteChildren: PublicRouteChildren = {
 const PublicRouteWithChildren =
   PublicRoute._addFileChildren(PublicRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof PublicRouteWithChildren
-  '/about': typeof AuthAboutIndexRoute
-<<<<<<< Updated upstream
-  '/test': typeof AuthTestIndexRoute
-=======
-  '/assignmentlist': typeof AuthAssignmentlistIndexRoute
-  '/loc-person': typeof AuthLocPersonIndexRoute
-  '/result': typeof AuthResultIndexRoute
-  '/submit_lab': typeof AuthSubmitlabIndexRoute
->>>>>>> Stashed changes
-  '/home': typeof PublicHomeIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof PublicRouteWithChildren
-  '/about': typeof AuthAboutIndexRoute
-<<<<<<< Updated upstream
-  '/test': typeof AuthTestIndexRoute
-=======
-  '/assignmentlist': typeof AuthAssignmentlistIndexRoute
-  '/loc-person': typeof AuthLocPersonIndexRoute
-  '/result': typeof AuthResultIndexRoute
-  '/submit_lab': typeof AuthSubmitlabIndexRoute
->>>>>>> Stashed changes
-  '/home': typeof PublicHomeIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/_public': typeof PublicRouteWithChildren
-  '/_auth/about/': typeof AuthAboutIndexRoute
-<<<<<<< Updated upstream
-  '/_auth/test/': typeof AuthTestIndexRoute
-=======
-  '/_auth/assignmentlist/': typeof AuthAssignmentlistIndexRoute
-  '/_auth/loc-person/': typeof AuthLocPersonIndexRoute
-  '/_auth/result/': typeof AuthResultIndexRoute
-  '/_auth/submit_lab/': typeof AuthSubmitlabIndexRoute
->>>>>>> Stashed changes
-  '/_public/home/': typeof PublicHomeIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-<<<<<<< Updated upstream
-  fullPaths: '/' | '' | '/about' | '/test' | '/home'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/about' | '/test' | '/home'
-=======
-  fullPaths:
-    | '/'
-    | ''
-    | '/about'
-    | '/assignmentlist'
-    | '/loc-person'
-    | '/result'
-    | '/submit_lab'
-    | '/home'
-    | '/test'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | ''
-    | '/about'
-    | '/assignmentlist'
-    | '/loc-person'
-    | '/result'
-    | '/submit_lab'
-    | '/home'
-    | '/test'
->>>>>>> Stashed changes
-  id:
-    | '__root__'
-    | '/'
-    | '/_auth'
-    | '/_public'
-    | '/_auth/about/'
-<<<<<<< Updated upstream
-    | '/_auth/test/'
-=======
-    | '/_auth/assignmentlist/'
-    | '/_auth/loc-person/'
-    | '/_auth/result/'
-    | '/_auth/submit_lab/'
->>>>>>> Stashed changes
-    | '/_public/home/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
-  PublicRoute: typeof PublicRouteWithChildren
-}
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   PublicRoute: PublicRouteWithChildren,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/_auth",
-        "/_public"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/about/",
-<<<<<<< Updated upstream
-        "/_auth/test/"
-=======
-        "/_auth/assignmentlist/",
-        "/_auth/loc-person/",
-        "/_auth/result/",
-        "/_auth/submit_lab/"
->>>>>>> Stashed changes
-      ]
-    },
-    "/_public": {
-      "filePath": "_public.tsx",
-      "children": [
-        "/_public/home/"
-      ]
-    },
-    "/_auth/about/": {
-      "filePath": "_auth/about/index.tsx",
-      "parent": "/_auth"
-    },
-<<<<<<< Updated upstream
-    "/_auth/test/": {
-      "filePath": "_auth/test/index.tsx",
-=======
-    "/_auth/assignmentlist/": {
-      "filePath": "_auth/assignmentlist/index.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/loc-person/": {
-      "filePath": "_auth/loc-person/index.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/result/": {
-      "filePath": "_auth/result/index.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/submit_lab/": {
-      "filePath": "_auth/submit_lab/index.tsx",
->>>>>>> Stashed changes
-      "parent": "/_auth"
-    },
-    "/_public/home/": {
-      "filePath": "_public/home/index.tsx",
-      "parent": "/_public"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

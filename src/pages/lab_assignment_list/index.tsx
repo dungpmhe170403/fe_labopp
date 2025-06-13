@@ -241,15 +241,15 @@ export default function LabAssignmentList() {
                   <Pagination>
                     <PaginationContent>
                       <PaginationItem>
-                        <PaginationPrevious href="#" />
+                        <PaginationPrevious href="#" size="default" />
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink href="#" isActive>
+                        <PaginationLink href="#" isActive size="default">
                           1
                         </PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationNext href="#" />
+                        <PaginationNext href="#" size="default" />
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>
